@@ -1356,7 +1356,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hopForce: 10
-  sightDistance: 50
+  sightDistance: 15
+  hungerTime: 0
+  thristTime: 0
+  eatPause: 0
 --- !u!54 &5728480887098582330
 Rigidbody:
   m_ObjectHideFlags: 0

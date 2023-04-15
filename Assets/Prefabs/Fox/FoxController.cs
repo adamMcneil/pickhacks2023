@@ -29,9 +29,11 @@ public class FoxController : MonoBehaviour
     {
         if (rigidbody.velocity == Vector3.zero || (rigidbody.velocity.magnitude > 0 && rigidbody.velocity.magnitude < 0.001f))
         {
-            CalculateRotation();
             if (eatPause == 0)
+            {
+              CalculateRotation();
               Hop();
+            }
         }
     }
 
