@@ -14,6 +14,7 @@ public class RabbitController : MonoBehaviour
     private float lifeTime = 60;
     private float hungerTime = 10;
     private float thristTime = 10;
+    private float reproductionTime = 10;
     public bool hasEaten = false;
     private bool canReproduce = true;
     private float reproductionCoolDown = 10f;
@@ -23,7 +24,6 @@ public class RabbitController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
         Helpers.AddRabbit(this.transform);
         StartCoroutine(LifeTimer());
-        StartCoroutine(HungerTimer());
     }
 
     void FixedUpdate()
@@ -114,17 +114,19 @@ public class RabbitController : MonoBehaviour
     IEnumerator LifeTimer()
     {
         yield return new WaitForSeconds(lifeTime);
-        Helpers.RemoveRabbit(this.transform);
-        Destroy(this.gameObject);
+        OnDeath();
     }
 
-    IEnumerator HungerTimer()
+    IEnumerator TickTimer()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(Helpers.tickRate);
         this.hungerTime--;
-        if(hungerTime <= 0 ) 
+        this.thristTime--;
+        this.reproductionTime--;
+        if (hungerTime <= 0 || thristTime <= 0)
         {
             OnDeath();
         }
+        StartCoroutine(TickTimer());
     }
 }

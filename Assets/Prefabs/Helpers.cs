@@ -8,6 +8,8 @@ public static class Helpers
     private static List<Transform> foxes = new List<Transform>();
     public static List<Transform> bushes = new List<Transform>();
 
+    public static float tickRate = 0.5f; // in seconds 
+
     #region Rabbits
     public static List<Transform> GetRabbits() { return rabbits; }
 
