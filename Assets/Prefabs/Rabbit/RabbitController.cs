@@ -11,7 +11,7 @@ public class RabbitController : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
-        Helpers.AddRabbit(this.gameObject);
+        Helpers.AddRabbit(this.transform);
     }
 
     void FixedUpdate()

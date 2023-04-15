@@ -4,9 +4,11 @@ using UnityEngine;
 
 public static class Helpers
 {
-    private static List<GameObject> rabbits = new List<GameObject>();
+    private static List<Transform> rabbits = new List<Transform>();
 
-    public static void AddRabbit(GameObject newRabbit)
+    public static List<Transform> GetRabbits() { return rabbits; }
+
+    public static void AddRabbit(Transform newRabbit)
     {
         rabbits.Add(newRabbit);
     }
