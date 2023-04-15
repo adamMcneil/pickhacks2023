@@ -138,7 +138,6 @@ public class RabbitController : MonoBehaviour
     IEnumerator TickTimer()
     {
         yield return new WaitForSeconds(Helpers.tickRate);
-        Debug.Log("here");
         this.hungerTime -= 0.5f;
         this.thristTime -= 0.5f;
         this.reproductionTime -= 0.5f;
