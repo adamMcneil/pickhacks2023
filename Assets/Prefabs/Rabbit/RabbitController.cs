@@ -16,9 +16,9 @@ public class RabbitController : MonoBehaviour
     private Rigidbody rigidbody; // Reference to the Rigidbody component
 
     private float lifeTime = 150;
-    private float maxHunger = 20;
-    private float maxThrist = 20;
-    private float maxReproduction = 30;
+    private float maxHunger = 30;
+    private float maxThrist = 30;
+    private float maxReproduction = 40;
     public float hungerTime;
     public float thristTime;
     public float reproductionTime;
@@ -155,7 +155,7 @@ public class RabbitController : MonoBehaviour
     {
         yield return new WaitForSeconds(Helpers.tickRate);
         this.hungerTime -= 0.5f;
-        this.thristTime -= 0.5f;
+        this.thristTime -= 0.5f;    
         this.reproductionTime -= 0.5f;
         hunger.text = this.hungerTime.ToString();
         thrist.text = this.thristTime.ToString();
