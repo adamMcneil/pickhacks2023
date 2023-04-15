@@ -4,23 +4,15 @@ using UnityEngine;
 
 public class RabbitController : MonoBehaviour
 {
-    public float hopForce = 5f; // The force applied to the hop
+    [SerializeField] private float hopForce; // The force applied to the hop
+    [SerializeField] private float sightDistance;
 
     private Rigidbody rigidbody; // Reference to the Rigidbody component
 
-    public static List<Transform> rabbits = null;
+    private List<Transform> foxes;
 
     void Start()
     {
-        if (rabbits == null)
-        {
-            rabbits = new List<Transform>();
-            rabbits.Add(this.transform);
-        }
-        else
-        {
-            rabbits.Add(this.transform);
-        }
         rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
         Helpers.AddRabbit(this.transform);
     }
@@ -29,7 +21,27 @@ public class RabbitController : MonoBehaviour
     {
         if (rigidbody.velocity == Vector3.zero)
         {
-            this.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+            Transform closestFox = Helpers.GetClosestFox(this.transform, sightDistance);
+            Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, sightDistance);
+            if (closestFox != null)
+            {
+                Vector3 direction = this.transform.position - closestFox.transform.position;
+                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+            }
+            else if (closestRabbit != null)
+            {
+                Debug.Log("rabbits");
+
+                Vector3 direction = closestRabbit.transform.position - this.transform.position;
+                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+            }
+            else
+            {
+                Debug.Log("Random");
+                this.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+            }
             Hop();
         }
     }
@@ -38,7 +50,6 @@ public class RabbitController : MonoBehaviour
     {
         if (collision.transform.CompareTag("Fox"))
         {
-            rabbits.Remove(collision.transform);
             Helpers.RemoveRabbit(this.transform);
             Destroy(this.gameObject);
         }
