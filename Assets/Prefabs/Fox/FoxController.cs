@@ -123,8 +123,8 @@ public class FoxController : MonoBehaviour
             eatPause -= 0.5f;
           } else
           {
-            this.hungerTime -= 1f;
-            this.thristTime -= 1f;
+            this.hungerTime -= .5f;
+            this.thristTime -= .5f;
             if (hungerTime <= 0 || thristTime <= 0)
             {
                 OnDeath();

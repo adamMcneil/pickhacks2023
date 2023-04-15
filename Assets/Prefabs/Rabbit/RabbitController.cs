@@ -28,6 +28,8 @@ public class RabbitController : MonoBehaviour
     private float maxBabyTime = 20;
     private float babyTime = 0;
     public bool gender = true;
+   public float foodAndWaterVision = 100;
+    public float rabbitViewDistance = 100;
 
     void Start()
     {
@@ -52,9 +54,9 @@ public class RabbitController : MonoBehaviour
     private void CalculateRotation()
     {
         Transform closestFox = Helpers.GetClosestFox(this.transform, sightDistance);
-        Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, sightDistance);
-        Transform closestBush = Helpers.GetClosestBush(this.transform, sightDistance);
-        Vector3 closestWater = Helpers.GetClosestWater(this.transform, sightDistance);
+        Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, rabbitViewDistance);
+        Transform closestBush = Helpers.GetClosestBush(this.transform, foodAndWaterVision);
+        Vector3 closestWater = Helpers.GetClosestWater(this.transform, foodAndWaterVision);
         if (closestFox != null)
         {
             Vector3 direction = this.transform.position - closestFox.transform.position;
@@ -62,7 +64,7 @@ public class RabbitController : MonoBehaviour
             this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
             return;
         }
-        else if (hungerTime < thristTime && (hungerTime <= maxHunger * .25f))
+        else if (hungerTime < thristTime && (hungerTime <= maxHunger * .25f) || !hasEaten)
         {
           if (closestBush != null)
           {
