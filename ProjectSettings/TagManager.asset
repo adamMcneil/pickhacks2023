@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - Fox
   - Rabbit
+=======
+  - Water
+>>>>>>> terrain
   layers:
   - Default
   - TransparentFX
