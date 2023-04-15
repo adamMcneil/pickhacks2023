@@ -161,8 +161,8 @@ MonoBehaviour:
   objectToSpawn: {fileID: 2599824170654035532, guid: cdabce45772208b448be3b070b5852d5, type: 3}
   minY: 1.3
   spawnInterval: 5
-  numberToSpawn: 40
-  maxBushes: 50
+  numberToSpawn: 103
+  maxBushes: 188
 --- !u!4 &223974228
 Transform:
   m_ObjectHideFlags: 0
@@ -906,8 +906,8 @@ MonoBehaviour:
   rabbitObject: {fileID: 3906650425340308739, guid: f55a261379dcab143851ce7b6e53b087, type: 3}
   foxObject: {fileID: 8930500555402342967, guid: 69b1e1b70e316d1408f21e7c0115d962, type: 3}
   minY: 1.3
-  numOfRabbitsToBeSpawned: 21
-  numOfFoxesToBeSpawned: 2
+  numOfRabbitsToBeSpawned: 52
+  numOfFoxesToBeSpawned: 0
 --- !u!4 &1752316673
 Transform:
   m_ObjectHideFlags: 0
