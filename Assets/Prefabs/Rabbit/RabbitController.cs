@@ -11,9 +11,9 @@ public class RabbitController : MonoBehaviour
 
     private Rigidbody rigidbody; // Reference to the Rigidbody component
 
-    private List<Transform> foxes;
 
     public bool hasEaten = false;
+    private bool canReproduce = true;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class RabbitController : MonoBehaviour
                 Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
                 this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
             }
-            else if (closestRabbit != null)
+            else if (closestRabbit != null  && canReproduce)
             {
                 Debug.Log("rabbits");
 
@@ -63,14 +63,22 @@ public class RabbitController : MonoBehaviour
             Helpers.RemoveRabbit(this.transform);
             Destroy(this.gameObject);
         } 
-        if (collision.transform.CompareTag("Rabbit"))
-      {
-            Helpers.AddRabbit(Instantiate(rabbitObject, new Vector3(this.transform.position.x + 2, this.transform.position.y, this.transform.position.z + 2), this.transform.rotation).transform);
-      }
-         if (collision.transform.CompareTag("Bush"))
-      {
+        if (collision.transform.CompareTag("Rabbit") && canReproduce)
+        {
+
+            GameObject spawnedobject = Instantiate(rabbitObject, new Vector3(this.transform.position.x + 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
+            spawnedobject.GetComponent<RabbitController>().MakeRabbit(false);
+            canReproduce = false;
+        }
+        if (collision.transform.CompareTag("Bush"))
+        {
             hasEaten = true;
-      }
+        }
+    }
+
+    public void MakeRabbit(bool canReproduce)
+    {
+        this.canReproduce = canReproduce;
     }
 
     void Hop()

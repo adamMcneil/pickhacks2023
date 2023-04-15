@@ -38,19 +38,12 @@ public class SpawnOnTerrain : MonoBehaviour
           position.y = terrain.SampleHeight(position);
           if (position.y >= minY)
           {
-              Helpers.addBushes(Instantiate(objectToSpawn, position, Quaternion.identity).transform);
+
+              Instantiate(objectToSpawn, position, Quaternion.identity);
           }
           else
           {
               SpawnObjectOnTerrain();
           }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag("Rabbit"))
-        {
-            Helpers.removeBushes(this.transform);
-            Destroy(this.gameObject);
-        } 
     }
 }

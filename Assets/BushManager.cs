@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class BushManager : MonoBehaviour
 {
+    private void Start()
+    {
+        Helpers.AddBushes(this.transform);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Rabbit"))
         {
-            Helpers.removeBushes(this.transform);
+            Helpers.RemoveBushes(this.transform);
             Destroy(this.gameObject);
         } 
     }

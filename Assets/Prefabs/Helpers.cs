@@ -71,13 +71,13 @@ public static class Helpers
     }
   #endregion
 
-  #region Bush
-    public static void addBushes(Transform newBush)
+    #region Bush
+    public static void AddBushes(Transform newBush)
     {
         bushes.Add(newBush);
     }
 
-    public static void removeBushes(Transform oldBush)
+    public static void RemoveBushes(Transform oldBush)
     {
         bushes.Remove(oldBush);
     }
@@ -98,5 +98,5 @@ public static class Helpers
           }
           return closestBush;
       }
-  #endregion
+    #endregion
   }
