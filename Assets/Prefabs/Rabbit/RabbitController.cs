@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HopRandomDirection : MonoBehaviour
+public class RabbitController : MonoBehaviour
 {
     public float hopForce = 5f; // The force applied to the hop
 
@@ -11,6 +11,7 @@ public class HopRandomDirection : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
+        Helpers.AddRabbit(this.gameObject);
     }
 
     void FixedUpdate()
