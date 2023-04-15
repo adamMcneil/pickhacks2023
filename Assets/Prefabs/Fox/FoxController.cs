@@ -10,6 +10,8 @@ public class FoxController : MonoBehaviour
     private float lifeTime = 500;
     private float maxHunger = 60;
     private float maxThrist = 60;
+    private float reproduceBufferTime = 20;
+    public float reproduceTimer;
     public float hungerTime;
     public float thristTime;
     public float eatPause;
@@ -21,6 +23,7 @@ public class FoxController : MonoBehaviour
     {
         hungerTime = maxHunger * .25f;
         thristTime = maxThrist * .5f;
+        reproduceTimer = reproduceBufferTime;
         rigidbody = GetComponent<Rigidbody>();
         Helpers.AddFoxes(this.transform);
         StartCoroutine(LifeTimer());
@@ -46,7 +49,7 @@ public class FoxController : MonoBehaviour
             Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, sightDistance);
             Transform closestFox = Helpers.GetClosestFox(this.transform, sightDistance);
             Vector3 closestWater = Helpers.GetClosestWater(this.transform, sightDistance);
-            if ((hungerTime > (maxHunger * .75f)) && (thristTime > (maxThrist * .75f)) && canReproduce && closestFox != null)
+            if ((hungerTime > (maxHunger * .33f)) && (thristTime > (maxThrist * .33f)) && reproduceTimer <= 0 && closestFox != null)
             {
                Vector3 direction = closestFox.transform.position - this.transform.position;
                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
@@ -90,9 +93,11 @@ public class FoxController : MonoBehaviour
         }
         if (collision.transform.CompareTag("Fox"))
         {
-          GameObject spawnedobject = Instantiate(foxObject, new Vector3(this.transform.position.x + 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
-          thristTime *= .5f;
-          hungerTime *= .5f;
+          if (reproduceTimer <= 0)
+          {
+            GameObject spawnedobject = Instantiate(foxObject, new Vector3(this.transform.position.x + 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
+            reproduceTimer = reproduceBufferTime;
+          }
         }
         if (collision.transform.CompareTag("Water"))
         {
@@ -108,13 +113,17 @@ public class FoxController : MonoBehaviour
       IEnumerator TickTimer()
       {
           yield return new WaitForSeconds(Helpers.tickRate);
+          if (reproduceTimer > 0)
+          { 
+            reproduceTimer -= 0.5f;
+          }
           if (eatPause != 0)
           {
             eatPause -= 0.5f;
           } else
           {
             this.hungerTime -= 0.5f;
-            this.thristTime -= 0.5f;    
+            this.thristTime -= 0.5f;
             if (hungerTime <= 0 || thristTime <= 0)
             {
                 OnDeath();

@@ -16,8 +16,8 @@ public class RabbitController : MonoBehaviour
     private Rigidbody rigidbody; // Reference to the Rigidbody component
 
     private float lifeTime = 150;
-    private float maxHunger = 30;
-    private float maxThrist = 30;
+    private float maxHunger = 100;
+    private float maxThrist = 100;
     private float maxReproduction = 10f;
     public float hungerTime;
     public float thristTime;
@@ -27,11 +27,12 @@ public class RabbitController : MonoBehaviour
     private float reproductionCoolDown = 10f;
     private float maxBabyTime = 20;
     private float babyTime = 0;
+    public bool gender = true;
 
     void Start()
     {
-        hungerTime = maxHunger;
-        thristTime = maxThrist;
+        hungerTime = maxHunger * .25f;
+        thristTime = maxThrist *.25f;
         reproductionTime = maxReproduction;
         rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
         Helpers.AddRabbit(this.transform);
@@ -73,7 +74,7 @@ public class RabbitController : MonoBehaviour
         }
         else if(reproductionTime <= 0)
         {
-          if (closestRabbit != null)
+          if (closestRabbit != null && closestRabbit.gameObject.GetComponent<RabbitController>().babyTime <= 0 && closestRabbit.GetComponent<RabbitController>().reproductionTime <= 0)
           {
             Vector3 direction = closestRabbit.transform.position - this.transform.position;
             Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
@@ -101,7 +102,7 @@ public class RabbitController : MonoBehaviour
             Helpers.RemoveRabbit(this.transform);
             Destroy(this.gameObject);
         } 
-        if (collision.transform.CompareTag("Rabbit") && reproductionTime <= 0 && babyTime <= 0 && hasEaten)
+        if (collision.transform.CompareTag("Rabbit") && collision.gameObject.GetComponent<RabbitController>().babyTime <= 0 && reproductionTime <= 0 && babyTime <= 0 && hasEaten)
         {
             GameObject spawnedobject = Instantiate(rabbitObject, new Vector3(this.transform.position.x + 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
             spawnedobject.GetComponent<RabbitController>().MakeRabbit(false);
@@ -127,6 +128,7 @@ public class RabbitController : MonoBehaviour
 
     public void StartBaby() {
         this.babyTime = maxBabyTime;
+        hasEaten = false;
         this.transform.localScale *= 0.5f;
     }
 

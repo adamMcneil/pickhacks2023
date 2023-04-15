@@ -34,24 +34,19 @@ public class SpawnOnTerrain : MonoBehaviour
             if (Helpers.bushes.Count < maxBushes)
             {
               SpawnObjectOnTerrain();
-              yield return new WaitForSeconds(spawnInterval);
             }
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
     private void SpawnObjectOnTerrain()
     {
-          TerrainData terrainData = terrain.terrainData;
-          Vector3 position = new Vector3(Random.Range(0.0f, terrainData.size.x), 0.0f, Random.Range(0.0f, terrainData.size.z));
-          position.y = terrain.SampleHeight(position);
-          if (position.y >= minY)
-          {
-
-              Instantiate(objectToSpawn, position, Quaternion.identity);
-          }
-          else
-          {
-              SpawnObjectOnTerrain();
-          }
+      TerrainData terrainData = terrain.terrainData;
+      Vector3 position = new Vector3(Random.Range(0.0f, terrainData.size.x), 0.0f, Random.Range(0.0f, terrainData.size.z));
+      position.y = terrain.SampleHeight(position);
+      if (position.y >= minY)
+      {
+          Instantiate(objectToSpawn, position, Quaternion.identity);
+      }
     }
 }
