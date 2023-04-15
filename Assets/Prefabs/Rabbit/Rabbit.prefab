@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hopForce: 5
+  sightDistance: 25
 --- !u!54 &2831851990677752541
 Rigidbody:
   m_ObjectHideFlags: 0
