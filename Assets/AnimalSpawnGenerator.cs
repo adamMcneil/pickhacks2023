@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class AnimalSpawnGenerator : MonoBehaviour
 {
@@ -11,26 +13,30 @@ public class AnimalSpawnGenerator : MonoBehaviour
     public float minY = 1.3f;
     public int numOfRabbitsToBeSpawned = 20;
     public int numOfFoxesToBeSpawned = 5;
-  
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TMP_InputField rabbits;
+    [SerializeField] private TMP_InputField foxes;
+
+    public void SpawnAnimals()
     {
-        for (int i  = 0; i < numOfRabbitsToBeSpawned; i++)
+        numOfRabbitsToBeSpawned = Int16.Parse(rabbits.text);
+        numOfFoxesToBeSpawned = Int16.Parse(foxes.text);
+        for (int i = 0; i < numOfRabbitsToBeSpawned; i++)
         {
             spawnRabbits();
         }
-        for (int i  = 0; i < numOfFoxesToBeSpawned; i++)
+        for (int i = 0; i < numOfFoxesToBeSpawned; i++)
         {
             spawnFoxes();
         }
     }
+
     private void spawnRabbits()
     {
           // Get the terrain data
           TerrainData terrainData = terrain.terrainData;
 
           // Generate a random position on the terrain
-          Vector3 position = new Vector3(Random.Range(0.0f, terrainData.size.x), 0.0f, Random.Range(0.0f, terrainData.size.z));
+          Vector3 position = new Vector3(UnityEngine.Random.Range(0.0f, terrainData.size.x), 0.0f, UnityEngine.Random.Range(0.0f, terrainData.size.z));
 
           // Get the height of the terrain at the position
           position.y = terrain.SampleHeight(position);
@@ -53,7 +59,7 @@ public class AnimalSpawnGenerator : MonoBehaviour
         TerrainData terrainData = terrain.terrainData;
 
         // Generate a random position on the terrain
-        Vector3 position = new Vector3(Random.Range(0.0f, terrainData.size.x), 0.0f, Random.Range(0.0f, terrainData.size.z));
+        Vector3 position = new Vector3(UnityEngine.Random.Range(0.0f, terrainData.size.x), 0.0f, UnityEngine.Random.Range(0.0f, terrainData.size.z));
 
         // Get the height of the terrain at the position
         position.y = terrain.SampleHeight(position);
