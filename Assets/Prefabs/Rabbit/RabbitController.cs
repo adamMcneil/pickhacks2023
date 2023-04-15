@@ -12,9 +12,9 @@ public class RabbitController : MonoBehaviour
     private Rigidbody rigidbody; // Reference to the Rigidbody component
 
     private float lifeTime = 60;
-    private float hungerTime = 10;
-    private float thristTime = 10;
-    private float reproductionTime = 10;
+    public float hungerTime = 10;
+    public float thristTime = 10;
+    public float reproductionTime = 10;
     public bool hasEaten = false;
     private bool canReproduce = true;
     private float reproductionCoolDown = 10f;
@@ -24,41 +24,59 @@ public class RabbitController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
         Helpers.AddRabbit(this.transform);
         StartCoroutine(LifeTimer());
+        StartCoroutine(TickTimer());
     }
 
     void FixedUpdate()
     {
         if (rigidbody.velocity == Vector3.zero)
         {
-            Transform closestFox = Helpers.GetClosestFox(this.transform, sightDistance);
-            Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, sightDistance);
-            Transform closestBush = Helpers.GetClosestBush(this.transform, sightDistance);
-            if (closestFox != null)
-            {
-                Vector3 direction = this.transform.position - closestFox.transform.position;
-                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
-                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
-            } else if (closestBush != null && !hasEaten)
+            CalculateRotation();
+            Hop();
+        }
+    }
+
+    private void CalculateRotation()
+    {
+        Transform closestFox = Helpers.GetClosestFox(this.transform, sightDistance);
+        Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, sightDistance);
+        Transform closestBush = Helpers.GetClosestBush(this.transform, sightDistance);
+        Vector3 closestWater = Helpers.GetClosestWater(this.transform, sightDistance);
+        if (closestFox != null)
+        {
+            Vector3 direction = this.transform.position - closestFox.transform.position;
+            Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+            this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+        }
+        else if (hungerTime < thristTime && hungerTime < reproductionTime)
+        {
+            if(closestRabbit != null)
             {
                 Vector3 direction = closestBush.transform.position - this.transform.position;
                 Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
                 this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
             }
-            else if (closestRabbit != null  && canReproduce && hungerTime > 5)
+        }
+        else if(reproductionTime < thristTime)
+        {
+            if (closestRabbit != null)
             {
-                Debug.Log("rabbits");
-
                 Vector3 direction = closestRabbit.transform.position - this.transform.position;
                 Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
                 this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
             }
-            else
-            {
-                Debug.Log("Random");
-                this.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-            }
-            Hop();
         }
+        else
+        {
+            if (closestWater != Vector3.zero)
+            {
+                Vector3 direction = closestWater - this.transform.position;
+                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+            }
+        }
+        // Debug.Log("Random");
+        // this.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0)
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -120,9 +138,10 @@ public class RabbitController : MonoBehaviour
     IEnumerator TickTimer()
     {
         yield return new WaitForSeconds(Helpers.tickRate);
-        this.hungerTime--;
-        this.thristTime--;
-        this.reproductionTime--;
+        Debug.Log("here");
+        this.hungerTime -= 0.5f;
+        this.thristTime -= 0.5f;
+        this.reproductionTime -= 0.5f;
         if (hungerTime <= 0 || thristTime <= 0)
         {
             OnDeath();

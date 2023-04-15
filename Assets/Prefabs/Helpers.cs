@@ -7,6 +7,7 @@ public static class Helpers
     private static List<Transform> rabbits = new List<Transform>();
     private static List<Transform> foxes = new List<Transform>();
     public static List<Transform> bushes = new List<Transform>();
+    public static List<BoxCollider> waters = new List<BoxCollider>();
 
     public static float tickRate = 0.5f; // in seconds 
 
@@ -85,20 +86,52 @@ public static class Helpers
     }
 
     public static Transform GetClosestBush(Transform myTransform, float sightDistance)
-      {
-          Transform closestBush = null;
-          float distance = sightDistance * sightDistance;
+    {
+        Transform closestBush = null;
+        float distance = sightDistance * sightDistance;
 
-          foreach (var bush in bushes)
-          {
-              float temp = (bush.position - myTransform.position).sqrMagnitude;
-              if (temp < distance && myTransform != bush)
-              {
-                  closestBush = bush;
-                  distance = temp;
-              }
-          }
-          return closestBush;
-      }
+        foreach (var bush in bushes)
+        {
+            float temp = (bush.position - myTransform.position).sqrMagnitude;
+            if (temp < distance && myTransform != bush)
+            {
+                closestBush = bush;
+                distance = temp;
+            }
+        }
+        return closestBush;
+    }
     #endregion
-  }
+
+    #region Water
+
+    public static void AddWater(BoxCollider newWater)
+    {
+        waters.Add(newWater);
+    }
+
+    public static void RemoveWater(BoxCollider oldWater)
+    {
+        waters.Remove(oldWater);
+    }
+
+    public static Vector3 GetClosestWater(Transform myTransform, float sightDistance)
+    {
+        Vector3 closestWaterPoint = Vector3.zero;
+        float distance = sightDistance * sightDistance;
+
+        foreach (var water in waters)
+        {
+            Vector3 currentWaterPoint = water.ClosestPoint(myTransform.position);
+            float temp = (currentWaterPoint - myTransform.position).sqrMagnitude;
+            if (temp < distance)
+            {
+                closestWaterPoint = currentWaterPoint;
+                distance = temp;
+            }
+        }
+        return closestWaterPoint;
+    }
+
+    #endregion
+}
