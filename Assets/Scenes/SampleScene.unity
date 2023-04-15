@@ -177,6 +177,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &298273157 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1560057138891992272, guid: cde4090a08cdd11478b5dff9e2014260, type: 3}
+  m_PrefabInstance: {fileID: 2419557004131181220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &387094136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1183,8 @@ MonoBehaviour:
   minY: 1.3
   numOfRabbitsToBeSpawned: 52
   numOfFoxesToBeSpawned: 0
+  rabbits: {fileID: 1990100525}
+  foxes: {fileID: 298273157}
 --- !u!4 &1752316673
 Transform:
   m_ObjectHideFlags: 0
@@ -1290,6 +1303,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1990100525 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5637361575782587498, guid: cde4090a08cdd11478b5dff9e2014260, type: 3}
+  m_PrefabInstance: {fileID: 2419557004131181220}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2014877658 stripped
