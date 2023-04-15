@@ -14,11 +14,13 @@ public class FoxController : MonoBehaviour
     public float thristTime;
     public float eatPause;
     private float eatPauseMax = 5f;
+    public bool canReproduce = true;
+    public GameObject foxObject;
 
     void Start()
     {
-        hungerTime = maxHunger;
-        thristTime = maxThrist;
+        hungerTime = maxHunger * .25f;
+        thristTime = maxThrist * .5f;
         rigidbody = GetComponent<Rigidbody>();
         Helpers.AddFoxes(this.transform);
         StartCoroutine(LifeTimer());
@@ -42,8 +44,16 @@ public class FoxController : MonoBehaviour
         if (rigidbody.velocity == Vector3.zero || (rigidbody.velocity.magnitude > 0 && rigidbody.velocity.magnitude < 0.001f))
         {
             Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, sightDistance);
+            Transform closestFox = Helpers.GetClosestFox(this.transform, sightDistance);
             Vector3 closestWater = Helpers.GetClosestWater(this.transform, sightDistance);
-            if (closestRabbit != null && hungerTime <= thristTime)
+            if ((hungerTime > (maxHunger * .75f)) && (thristTime > (maxThrist * .75f)) && canReproduce && closestFox != null)
+            {
+               Vector3 direction = closestFox.transform.position - this.transform.position;
+               Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+               this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+               return; 
+            }
+            else if (closestRabbit != null && hungerTime <= thristTime)
             {
                Vector3 direction = closestRabbit.transform.position - this.transform.position;
                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
@@ -77,6 +87,12 @@ public class FoxController : MonoBehaviour
         {
             hungerTime = maxHunger;
             eatPause = eatPauseMax;
+        }
+        if (collision.transform.CompareTag("Fox"))
+        {
+          GameObject spawnedobject = Instantiate(foxObject, new Vector3(this.transform.position.x + 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
+          thristTime *= .5f;
+          hungerTime *= .5f;
         }
         if (collision.transform.CompareTag("Water"))
         {
