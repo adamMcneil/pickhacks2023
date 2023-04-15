@@ -6,6 +6,7 @@ public class FoxController : MonoBehaviour
 {
     [SerializeField] private float hopForce;
     [SerializeField] private float sightDistance;
+    public float breedSight = 100;
     private Rigidbody rigidbody;
     private float lifeTime = 500;
     private float maxHunger = 60;
@@ -47,7 +48,7 @@ public class FoxController : MonoBehaviour
         if (rigidbody.velocity == Vector3.zero || (rigidbody.velocity.magnitude > 0 && rigidbody.velocity.magnitude < 0.001f))
         {
             Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, sightDistance);
-            Transform closestFox = Helpers.GetClosestFox(this.transform, sightDistance);
+            Transform closestFox = Helpers.GetClosestFox(this.transform, breedSight);
             Vector3 closestWater = Helpers.GetClosestWater(this.transform, sightDistance);
             if ((hungerTime > (maxHunger * .33f)) && (thristTime > (maxThrist * .33f)) && reproduceTimer <= 0 && closestFox != null)
             {
@@ -122,8 +123,8 @@ public class FoxController : MonoBehaviour
             eatPause -= 0.5f;
           } else
           {
-            this.hungerTime -= 0.5f;
-            this.thristTime -= 0.5f;
+            this.hungerTime -= 1f;
+            this.thristTime -= 1f;
             if (hungerTime <= 0 || thristTime <= 0)
             {
                 OnDeath();

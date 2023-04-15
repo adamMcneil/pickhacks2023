@@ -81,6 +81,13 @@ public class RabbitController : MonoBehaviour
             this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
             return;
           }
+            else if (closestRabbit != null && closestRabbit.gameObject.GetComponent<RabbitController>().babyTime <= 0 && closestRabbit.GetComponent<RabbitController>().reproductionTime > 0)
+            {
+                Vector3 direction = this.transform.position - closestRabbit.transform.position;
+                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+                return;
+            }
         }
         else
         {

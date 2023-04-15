@@ -1356,7 +1356,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hopForce: 10
-  sightDistance: 15
+  sightDistance: 30
+  breedSight: 100
+  reproduceTimer: 0
   hungerTime: 0
   thristTime: 0
   eatPause: 0
