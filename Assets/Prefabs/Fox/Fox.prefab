@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1649002189c78e46b95178f562cbe6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hopForce: 7
+  hopForce: 10
   sightDistance: 50
 --- !u!54 &5728480887098582330
 Rigidbody:

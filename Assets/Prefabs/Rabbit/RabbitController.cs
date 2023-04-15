@@ -11,14 +11,19 @@ public class RabbitController : MonoBehaviour
 
     private Rigidbody rigidbody; // Reference to the Rigidbody component
 
-
+    private float lifeTime = 60;
+    private float hungerTime = 10;
+    private float thristTime = 10;
     public bool hasEaten = false;
     private bool canReproduce = true;
+    private float reproductionCoolDown = 10f;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>(); // Get the Rigidbody component
         Helpers.AddRabbit(this.transform);
+        StartCoroutine(LifeTimer());
+        StartCoroutine(HungerTimer());
     }
 
     void FixedUpdate()
@@ -39,7 +44,7 @@ public class RabbitController : MonoBehaviour
                 Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
                 this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
             }
-            else if (closestRabbit != null  && canReproduce)
+            else if (closestRabbit != null  && canReproduce && hungerTime > 5)
             {
                 Debug.Log("rabbits");
 
@@ -63,12 +68,11 @@ public class RabbitController : MonoBehaviour
             Helpers.RemoveRabbit(this.transform);
             Destroy(this.gameObject);
         } 
-        if (collision.transform.CompareTag("Rabbit") && canReproduce)
+        if (collision.transform.CompareTag("Rabbit") && canReproduce && hungerTime > 5)
         {
-
             GameObject spawnedobject = Instantiate(rabbitObject, new Vector3(this.transform.position.x + 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
             spawnedobject.GetComponent<RabbitController>().MakeRabbit(false);
-            canReproduce = false;
+            OnReproduce();
         }
         if (collision.transform.CompareTag("Bush"))
         {
@@ -76,9 +80,22 @@ public class RabbitController : MonoBehaviour
         }
     }
 
+    public void OnDeath()
+    {
+        Helpers.RemoveRabbit(this.transform);
+        Destroy(this.gameObject);
+    }
+
     public void MakeRabbit(bool canReproduce)
     {
         this.canReproduce = canReproduce;
+        StartCoroutine(ReproductionTimer());
+    }
+    public void OnReproduce()
+    {
+        canReproduce = false;
+        hasEaten= false;
+        StartCoroutine(ReproductionTimer());
     }
 
     void Hop()
@@ -86,5 +103,28 @@ public class RabbitController : MonoBehaviour
         Vector3 direction = this.transform.forward + Vector3.up * 0.5f;
         Vector3 hopForceVector = direction * hopForce; 
         rigidbody.AddForce(hopForceVector, ForceMode.Impulse); 
+    }
+
+    IEnumerator ReproductionTimer()
+    {
+        yield return new WaitForSeconds(reproductionCoolDown);
+        this.canReproduce = true;
+    }
+
+    IEnumerator LifeTimer()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        Helpers.RemoveRabbit(this.transform);
+        Destroy(this.gameObject);
+    }
+
+    IEnumerator HungerTimer()
+    {
+        yield return new WaitForSeconds(1f);
+        this.hungerTime--;
+        if(hungerTime <= 0 ) 
+        {
+            OnDeath();
+        }
     }
 }

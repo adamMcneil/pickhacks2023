@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hopForce: 5
-  sightDistance: 25
+  sightDistance: 50
   rabbitObject: {fileID: 3906650425340308739}
   hasEaten: 0
 --- !u!54 &2831851990677752541
