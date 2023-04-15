@@ -25,6 +25,8 @@ public class RabbitController : MonoBehaviour
     public bool hasEaten = false;
     private bool canReproduce = true;
     private float reproductionCoolDown = 10f;
+    private float maxBabyTime = 20;
+    private float babyTime = 0;
 
     void Start()
     {
@@ -99,15 +101,17 @@ public class RabbitController : MonoBehaviour
             Helpers.RemoveRabbit(this.transform);
             Destroy(this.gameObject);
         } 
-        if (collision.transform.CompareTag("Rabbit") && reproductionTime <= 0)
+        if (collision.transform.CompareTag("Rabbit") && reproductionTime <= 0 && babyTime <= 0 && hasEaten)
         {
             GameObject spawnedobject = Instantiate(rabbitObject, new Vector3(this.transform.position.x + 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
             spawnedobject.GetComponent<RabbitController>().MakeRabbit(false);
+            spawnedobject.GetComponent<RabbitController>().StartBaby();
             OnReproduce();
         }
         if (collision.transform.CompareTag("Bush"))
         {
             hungerTime = maxHunger;
+            hasEaten = true;
         }
         if (collision.transform.CompareTag("Water"))
         {
@@ -119,6 +123,11 @@ public class RabbitController : MonoBehaviour
     {
         Helpers.RemoveRabbit(this.transform);
         Destroy(this.gameObject);
+    }
+
+    public void StartBaby() {
+        this.babyTime = maxBabyTime;
+        this.transform.localScale *= 0.5f;
     }
 
     public void MakeRabbit(bool canReproduce)
@@ -158,6 +167,12 @@ public class RabbitController : MonoBehaviour
         this.hungerTime -= 0.5f;
         this.thristTime -= 0.5f;    
         this.reproductionTime -= 0.5f;
+        if (this.babyTime > 0) {
+            this.babyTime -= 0.5f;
+            if (this.babyTime <= 0) {
+                this.transform.localScale *= 2;
+            }
+        }
         hunger.text = this.hungerTime.ToString();
         thrist.text = this.thristTime.ToString();
         reproduction.text = this.reproductionTime.ToString();
