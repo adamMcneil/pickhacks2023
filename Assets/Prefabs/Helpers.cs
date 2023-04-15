@@ -11,6 +11,25 @@ public static class Helpers
 
     public static float tickRate = 0.5f; // in seconds 
 
+    public static void ClearMap()
+    {
+        foreach (var thing in rabbits)
+        {
+            GameObject.Destroy(thing.gameObject);
+        }
+        foreach (var thing in foxes)
+        {
+            GameObject.Destroy(thing.gameObject);
+        }
+        foreach (var thing in bushes)
+        {
+            GameObject.Destroy(thing.gameObject);
+        }
+        rabbits = new List<Transform>();
+        foxes = new List<Transform>();
+        bushes = new List<Transform>();
+}
+
     #region Rabbits
     public static List<Transform> GetRabbits() { return rabbits; }
 
