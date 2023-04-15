@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 177950992442204110}
   - component: {fileID: 1790239069840174388}
   - component: {fileID: 2831851990677752541}
+  - component: {fileID: 4031711322971134528}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Rabbit
@@ -442,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3906650425340308739}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 127.30153, y: 1.7212964, z: 187.76488}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5684287699911131314}
@@ -465,6 +466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hopForce: 5
   sightDistance: 25
+  rabbitObject: {fileID: 3906650425340308739}
+  hasEaten: 0
 --- !u!54 &2831851990677752541
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -481,6 +484,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &4031711322971134528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3906650425340308739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5465832984706610624
 GameObject:
   m_ObjectHideFlags: 0

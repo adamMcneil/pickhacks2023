@@ -6,6 +6,7 @@ public static class Helpers
 {
     private static List<Transform> rabbits = new List<Transform>();
     private static List<Transform> foxes = new List<Transform>();
+    public static List<Transform> bushes = new List<Transform>();
 
     #region Rabbits
     public static List<Transform> GetRabbits() { return rabbits; }
@@ -68,5 +69,34 @@ public static class Helpers
         }
         return closestFox;
     }
-    #endregion
-}
+  #endregion
+
+  #region Bush
+    public static void addBushes(Transform newBush)
+    {
+        bushes.Add(newBush);
+    }
+
+    public static void removeBushes(Transform oldBush)
+    {
+        bushes.Remove(oldBush);
+    }
+
+    public static Transform GetClosestBush(Transform myTransform, float sightDistance)
+      {
+          Transform closestBush = null;
+          float distance = sightDistance * sightDistance;
+
+          foreach (var bush in bushes)
+          {
+              float temp = (bush.position - myTransform.position).sqrMagnitude;
+              if (temp < distance && myTransform != bush)
+              {
+                  closestBush = bush;
+                  distance = temp;
+              }
+          }
+          return closestBush;
+      }
+  #endregion
+  }

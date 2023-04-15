@@ -7,9 +7,13 @@ public class RabbitController : MonoBehaviour
     [SerializeField] private float hopForce; // The force applied to the hop
     [SerializeField] private float sightDistance;
 
+    public GameObject rabbitObject;
+
     private Rigidbody rigidbody; // Reference to the Rigidbody component
 
     private List<Transform> foxes;
+
+    public bool hasEaten = false;
 
     void Start()
     {
@@ -23,9 +27,15 @@ public class RabbitController : MonoBehaviour
         {
             Transform closestFox = Helpers.GetClosestFox(this.transform, sightDistance);
             Transform closestRabbit = Helpers.GetClosestRabbit(this.transform, sightDistance);
+            Transform closestBush = Helpers.GetClosestBush(this.transform, sightDistance);
             if (closestFox != null)
             {
                 Vector3 direction = this.transform.position - closestFox.transform.position;
+                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+            } else if (closestBush != null && !hasEaten)
+            {
+                Vector3 direction = closestBush.transform.position - this.transform.position;
                 Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
                 this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
             }
@@ -52,7 +62,15 @@ public class RabbitController : MonoBehaviour
         {
             Helpers.RemoveRabbit(this.transform);
             Destroy(this.gameObject);
-        }
+        } 
+        if (collision.transform.CompareTag("Rabbit"))
+      {
+            Helpers.AddRabbit(Instantiate(rabbitObject, new Vector3(this.transform.position.x + 2, this.transform.position.y, this.transform.position.z + 2), this.transform.rotation).transform);
+      }
+         if (collision.transform.CompareTag("Bush"))
+      {
+            hasEaten = true;
+      }
     }
 
     void Hop()
