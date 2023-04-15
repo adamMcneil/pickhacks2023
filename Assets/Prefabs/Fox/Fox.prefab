@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 2422249383095868911}
   m_Layer: 0
   m_Name: Tail
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 7415601428834336425}
   m_Layer: 0
   m_Name: Snout
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 2654653291267013426}
   m_Layer: 0
   m_Name: Eyes
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 3008807609782517474}
   m_Layer: 0
   m_Name: Nose
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 9081157195976592370}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 2105698496991890102}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -901,7 +901,7 @@ GameObject:
   - component: {fileID: 608489799190049161}
   m_Layer: 0
   m_Name: Ears
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 6357834805054190298}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1033,7 +1033,7 @@ GameObject:
   - component: {fileID: 1334535680895327910}
   m_Layer: 0
   m_Name: Bottom
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1223,7 +1223,7 @@ GameObject:
   - component: {fileID: 5317369191196619894}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1320,7 +1320,7 @@ GameObject:
   - component: {fileID: 5728480887098582330}
   m_Layer: 0
   m_Name: Fox
-  m_TagString: Untagged
+  m_TagString: Fox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1649002189c78e46b95178f562cbe6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hopForce: 5
+  hopForce: 7
   sightDistance: 5
 --- !u!54 &5728480887098582330
 Rigidbody:

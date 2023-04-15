@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FoxController : MonoBehaviour
 {
-    [SerializeField] private float hopForce = 5f;
-    [SerializeField] private float sightDistance = 5f;
+    [SerializeField] private float hopForce;
+    [SerializeField] private float sightDistance;
     private Rigidbody rigidbody;
     private List<Transform> rabbits;
 
@@ -19,15 +19,19 @@ public class FoxController : MonoBehaviour
         if (rigidbody.velocity == Vector3.zero)
         {
             Transform closestRabbit = GetClosestRabbit();
-            Debug.Log(closestRabbit);
+            //Debug.DrawRay(Vector3.zero, closestRabbit.position, Color.red, 1f);
+            //Debug.DrawRay(Vector3.zero, this.transform.position, Color.red, 1f);
             if (closestRabbit == null)
             {
                 this.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
             }
             else
             {
-                Vector3 direction = (this.transform.position - closestRabbit.transform.position).normalized;
-                this.transform.rotation = Quaternion.Euler(0, Mathf.Sin(direction.x), 0);
+                Vector3 direction = closestRabbit.transform.position - this.transform.position;
+                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+                //Debug.DrawRay(Vector3.zero, Vector3.right, Color.red, 1f);
+                //Debug.DrawRay(Vector3.zero, normilizedDirection, Color.red, 1f);
+                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
 
             }
             Hop();
@@ -49,9 +53,7 @@ public class FoxController : MonoBehaviour
         rabbits = Helpers.GetRabbits();
         foreach (var rabbit in rabbits)
         {
-            Debug.Log(rabbit);
-            Debug.Log((rabbit.transform.position - this.transform.position).sqrMagnitude);
-            if ((rabbit.transform.position - this.transform.position).sqrMagnitude < distance)
+            if ((rabbit.position - this.transform.position).sqrMagnitude < distance)
             {
                 closestRabbit = rabbit;
             }

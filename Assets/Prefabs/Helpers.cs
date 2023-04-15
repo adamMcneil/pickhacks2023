@@ -12,5 +12,10 @@ public static class Helpers
     {
         rabbits.Add(newRabbit);
     }
+
+    public static void RemoveRabbit(Transform oldRabbit)
+    {
+        rabbits.Remove(oldRabbit);
+    }
     
 }

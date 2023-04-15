@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6427559943771442590}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Rabbit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 3183135864579886658}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Rabbit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 2831851990677752541}
   m_Layer: 0
   m_Name: Rabbit
-  m_TagString: Untagged
+  m_TagString: Rabbit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -464,7 +464,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hopForce: 5
-  hopDuration: 0.5
 --- !u!54 &2831851990677752541
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -495,7 +494,7 @@ GameObject:
   - component: {fileID: 1034975691437763289}
   m_Layer: 0
   m_Name: Tail
-  m_TagString: Untagged
+  m_TagString: Rabbit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
