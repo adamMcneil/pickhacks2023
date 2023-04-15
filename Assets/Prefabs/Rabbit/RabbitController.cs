@@ -61,23 +61,17 @@ public class RabbitController : MonoBehaviour
         }
         else if (hungerTime < thristTime)
         {
-            if(closestRabbit != null)
-            {
-                Vector3 direction = closestBush.transform.position - this.transform.position;
-                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
-                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
-                return;
-            }
+          Vector3 direction = closestBush.transform.position - this.transform.position;
+          Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+          this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+          return;
         }
         else if(reproductionTime <= 0)
         {
-            if (closestRabbit != null)
-            {
-                Vector3 direction = closestRabbit.transform.position - this.transform.position;
-                Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
-                this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
-                return;
-            }
+          Vector3 direction = closestRabbit.transform.position - this.transform.position;
+          Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+          this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+          return;
         }
         else
         {
