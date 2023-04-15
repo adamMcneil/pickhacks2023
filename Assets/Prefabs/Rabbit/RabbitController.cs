@@ -39,7 +39,7 @@ public class RabbitController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (rigidbody.velocity == Vector3.zero)
+        if (rigidbody.velocity == Vector3.zero || (rigidbody.velocity.magnitude > 0 && rigidbody.velocity.magnitude < 0.001f))
         {
             CalculateRotation();
             Hop();
@@ -57,6 +57,7 @@ public class RabbitController : MonoBehaviour
             Vector3 direction = this.transform.position - closestFox.transform.position;
             Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
             this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+            return;
         }
         else if (hungerTime < thristTime)
         {
