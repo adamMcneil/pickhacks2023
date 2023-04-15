@@ -600,7 +600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hopForce: 5
-  sightDistance: 75
+  sightDistance: 24
   hunger: {fileID: 5507341065208446144}
   thrist: {fileID: 5908848184848015571}
   reproduction: {fileID: 4485127968889821237}

@@ -18,7 +18,7 @@ public class RabbitController : MonoBehaviour
     private float lifeTime = 150;
     private float maxHunger = 30;
     private float maxThrist = 30;
-    private float maxReproduction = 40;
+    private float maxReproduction = 10f;
     public float hungerTime;
     public float thristTime;
     public float reproductionTime;
@@ -59,23 +59,29 @@ public class RabbitController : MonoBehaviour
             this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
             return;
         }
-        else if (hungerTime < thristTime)
+        else if (hungerTime < thristTime && (hungerTime <= maxHunger * .25f))
         {
-          Vector3 direction = closestBush.transform.position - this.transform.position;
-          Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
-          this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
-          return;
+          if (closestBush != null)
+          {
+            Vector3 direction = closestBush.transform.position - this.transform.position;
+            Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+            this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+            return;
+          }
         }
         else if(reproductionTime <= 0)
         {
-          Vector3 direction = closestRabbit.transform.position - this.transform.position;
-          Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
-          this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
-          return;
+          if (closestRabbit != null)
+          {
+            Vector3 direction = closestRabbit.transform.position - this.transform.position;
+            Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
+            this.transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, normilizedDirection, Vector3.up) + 90, 0);
+            return;
+          }
         }
         else
         {
-            if (closestWater != Vector3.zero)
+            if (closestWater != Vector3.zero && (thristTime <= maxThrist * .25f))
             {
                 Vector3 direction = closestWater - this.transform.position;
                 Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
