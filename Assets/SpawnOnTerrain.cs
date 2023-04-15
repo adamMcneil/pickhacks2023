@@ -11,14 +11,22 @@ public class SpawnOnTerrain : MonoBehaviour
     public int numberToSpawn = 5;
     public int maxBushes = 50;
 
-    private void Start()
+
+    public void Stop()
     {
-      for (int i = 0; i < numberToSpawn; i++)
-      {
-        SpawnObjectOnTerrain();
-      }
-      StartCoroutine(SpawnObjectsOnTimer());
+        StopAllCoroutines();
     }
+
+    public void SpawnPlants()
+    {
+        for (int i = 0; i < numberToSpawn; i++)
+        {
+            SpawnObjectOnTerrain();
+        }
+        StartCoroutine(SpawnObjectsOnTimer());
+
+    }
+
     private IEnumerator SpawnObjectsOnTimer()
     {
         while (true)

@@ -12,18 +12,19 @@ public class AnimalSpawnGenerator : MonoBehaviour
     public int numOfRabbitsToBeSpawned = 20;
     public int numOfFoxesToBeSpawned = 5;
   
-    // Start is called before the first frame update
-    void Start()
+
+    public void SpawnAnimals()
     {
-        for (int i  = 0; i < numOfRabbitsToBeSpawned; i++)
+        for (int i = 0; i < numOfRabbitsToBeSpawned; i++)
         {
             spawnRabbits();
         }
-        for (int i  = 0; i < numOfFoxesToBeSpawned; i++)
+        for (int i = 0; i < numOfFoxesToBeSpawned; i++)
         {
             spawnFoxes();
         }
     }
+
     private void spawnRabbits()
     {
           // Get the terrain data
