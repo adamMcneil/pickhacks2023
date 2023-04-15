@@ -1360,6 +1360,8 @@ MonoBehaviour:
   hungerTime: 0
   thristTime: 0
   eatPause: 0
+  canReproduce: 1
+  foxObject: {fileID: 8930500555402342967}
 --- !u!54 &5728480887098582330
 Rigidbody:
   m_ObjectHideFlags: 0
