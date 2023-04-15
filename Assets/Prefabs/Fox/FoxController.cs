@@ -50,7 +50,7 @@ public class FoxController : MonoBehaviour
             }
             else
             {
-                if (closestWater != Vector3.zero)
+                if (closestWater != Vector3.zero && thristTime < (maxThrist * .25f))
                 {
                     Vector3 direction = closestWater - this.transform.position;
                     Vector3 normilizedDirection = new Vector3(direction.x, 0, direction.z).normalized;
