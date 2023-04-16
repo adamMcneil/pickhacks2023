@@ -606,9 +606,12 @@ MonoBehaviour:
   reproduction: {fileID: 4485127968889821237}
   rabbitObject: {fileID: 3906650425340308739}
   hungerTime: 10
-  thristTime: 10
+  thristTime: 15
   reproductionTime: 10
   hasEaten: 0
+  gender: 1
+  foodAndWaterVision: 100
+  rabbitViewDistance: 100
 --- !u!54 &2831851990677752541
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -159,8 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 40919615}
   objectToSpawn: {fileID: 2599824170654035532, guid: cdabce45772208b448be3b070b5852d5, type: 3}
-  minY: 1.3
-  spawnInterval: 0.2
+  minY: 1.29
+  spawnInterval: 0.1
   numberToSpawn: 215
   maxBushes: 324
 --- !u!4 &223974228

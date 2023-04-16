@@ -59,13 +59,13 @@ public class AnimalSpawnGenerator : MonoBehaviour
         TerrainData terrainData = terrain.terrainData;
 
         // Generate a random position on the terrain
-        Vector3 position = new Vector3(UnityEngine.Random.Range(0.0f, terrainData.size.x), 0.0f, UnityEngine.Random.Range(0.0f, terrainData.size.z));
+        Vector3 position = new Vector3(UnityEngine.Random.Range(0.0f, terrainData.size.x), 2.0f, UnityEngine.Random.Range(0.0f, terrainData.size.z));
 
         // Get the height of the terrain at the position
-        position.y = terrain.SampleHeight(position);
+        float y = terrain.SampleHeight(position);
 
         // Check if the height is above the minimum Y level
-        if (position.y >= minY)
+        if (y >= minY)
         {
             GameObject spawnedObject = Instantiate(foxObject, position, Quaternion.identity);
         }

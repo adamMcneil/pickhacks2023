@@ -116,6 +116,12 @@ public class RabbitController : MonoBehaviour
             GameObject spawnedobject = Instantiate(rabbitObject, new Vector3(this.transform.position.x + 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
             spawnedobject.GetComponent<RabbitController>().MakeRabbit(false);
             spawnedobject.GetComponent<RabbitController>().StartBaby();
+            spawnedobject = Instantiate(rabbitObject, new Vector3(this.transform.position.x - 2f , this.transform.position.y, this.transform.position.z - 2f), this.transform.rotation);
+            spawnedobject.GetComponent<RabbitController>().MakeRabbit(false);
+            spawnedobject.GetComponent<RabbitController>().StartBaby();
+            spawnedobject = Instantiate(rabbitObject, new Vector3(this.transform.position.x - 2f , this.transform.position.y, this.transform.position.z + 2f), this.transform.rotation);
+            spawnedobject.GetComponent<RabbitController>().MakeRabbit(false);
+            spawnedobject.GetComponent<RabbitController>().StartBaby();
             OnReproduce();
         }
         if (collision.transform.CompareTag("Bush"))
