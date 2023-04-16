@@ -45,12 +45,11 @@ public class GameManager : MonoBehaviour
     public void Pause() {
         System.DateTime dt = System.DateTime.Now;
         string time = dt.ToString("yyyy-MM-dd_HH-mm-ss");
-        //Debug.Log(Application.persistentDataPath);
         WriteFile(time + "_eco_sim_data.csv", dataManager.ToCSV());
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     public void Resume() {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
     }
 }
