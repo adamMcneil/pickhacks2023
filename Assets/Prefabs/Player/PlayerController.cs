@@ -22,9 +22,13 @@ public class PlayerController : MonoBehaviour
         {
             Time.timeScale = 4.0f;
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha5))
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             Time.timeScale = 5.0f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            Time.timeScale = 10.0f;
         }
     }
 }
